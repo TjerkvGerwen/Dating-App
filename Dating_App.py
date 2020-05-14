@@ -17,7 +17,7 @@ cursor = conn.cursor()
 def getTextInput():
     result=textExample.get(1.0, tk.END+"-1c")
 
-    cursor.execute(result)
+    cursor.execute("INSERT INTO persgegevens (voornaam, lidnummer) VALUES ("+result+")")
     conn.commit()
 
 
