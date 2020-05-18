@@ -15,21 +15,24 @@ cursor = conn.cursor()
 
 cursor.execute("SELECT COUNT (*) FROM persgegevens")
 lidnummercounter = cursor.fetchone()[0] + 1
+lidnummercounter = str(lidnummercounter)
 
 print (lidnummercounter)
 
 def getTextInput():
     result=textExample.get(1.0, tk.END+"-1c")
-
-    cursor.execute("INSERT INTO persgegevens (voornaam, lidnummer) VALUES ("+result+")")
+    #cursor.execute("INSERT INTO persgegevens VALUES ("result," "lidnummercounter)")
+    cursor.execute("INSERT INTO persgegevens (voornaam, lidnummer) VALUES('{}','{}')".format(result, lidnummercounter))
+    #INSERT INTO persgegevens(voornaam, lidnummer) VALUES('henkk', '20201')
     conn.commit()
+
 
 def buttonA():
     cursor.execute("INSERT INTO quizvragen (geslacht) VALUES(A)")
     conn.commit()
 
 def buttonB():
-    cursor.execute("INSERT INTO persgegevens (voornaam, lidnummer) VALUES (" + result + ")")
+    cursor.execute("INSERT INTO persgegevens (voornaam, lidnummer) VALUES (" +result+ ")")
     conn.commit()
 
 textExample=tk.Text(root, height= 1)
